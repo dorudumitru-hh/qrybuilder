@@ -9,39 +9,49 @@
 </head>
 
 <body>
+  <p id="result"></p>
+  <textarea name="mandatory" id="mandatory" cols="50" rows="10"></textarea>
+  <textarea name="regular" id="regular" cols="50" rows="10"></textarea>
+  <textarea name="optional" id="optional" cols="50" rows="10"></textarea>
   <script>
     //////////////////////////////////////////
     ////////// -- EDIT THIS CODE -- //////////
 
-    const mandatory = [
-      'a',
-      'b',
-      'c'
-    ];
+    // const mandatory = [
+    //   'a',
+    //   'b',
+    //   'c'
+    // ];
 
-    const regular = [
-      '1',
-      '2',
-      '3'
-    ];
+    // const regular = [
+    //   '1',
+    //   '2',
+    //   '3'
+    // ];
 
-    const optional = [
-      'x',
-      'y',
-      'z'
-    ];
+    // const optional = [
+    //   'x',
+    //   'y',
+    //   'z'
+    // ];
 
     ///////////////////////////////////////////////////
     ////////// -- DO NOT TOUCH THIS CODE -- //////////
-
+    const mandatory = document.getElementById('mandatory').value.split(',');
+    const regular = document.getElementById('regular').value.split(',');
+    const optional = document.getElementById('optional').value.split(',');
+    const htmlRes = document.getElementById('result');
     const mandatoryJoined = mandatory.join(' ');
 
     const results = regular.map((regEl) => {
-      const partial = optional.map(optEl => `${mandatoryJoined} ${regEl} ${optEl}`);
+      const partial = optional.map(optEl => `${mandatoryJoined.trim()} ${regEl.trim()} ${optEl.trim()}`);
       return partial;
     });
 
-    results.map(res => console.log(res.join(' or ')));
+    results.map(res => {
+      console.log(res.join(' or '));
+      htmlRes.value(res.join(' or '));
+    });
 
   </script>
 </body>
