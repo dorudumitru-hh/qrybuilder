@@ -25,41 +25,10 @@
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
-    //////////////////////////////////////////
-    ////////// -- EDIT THIS CODE -- //////////
-
-    // const mandatory = [
-    //   'a',
-    //   'b',
-    //   'c'
-    // ];
-
-    // const regular = [
-    //   '1',
-    //   '2',
-    //   '3'
-    // ];
-
-    // const optional = [
-    //   'x',
-    //   'y',
-    //   'z'
-    // ];
-
-    ///////////////////////////////////////////////////
-    ////////// -- DO NOT TOUCH THIS CODE -- //////////
-
-    // const mandatory = document.getElementById('mandatory').value.split(',');
-    // const regular = document.getElementById('regular').value.split(',');
-    // const optional = document.getElementById('optional').value.split(',');
-    // const htmlRes = document.getElementById('result');
-    // const mandatoryJoined = mandatory.join(' ');
-
     const mandatory = $('#mandatory');
     const regular = $('#regular');
     const optional = $('#optional');
     const htmlRes = $('#result');
-    // const mandatoryJoined = mandatory.value.split(',').join(' ');
 
     const updateResult = () => {
       const mandatoryJoined = mandatory.val().split(',').map(e => e.trim()).join(' ');
@@ -68,21 +37,11 @@
         return partial.join(' or ');
       });
       if (results.length > 1) htmlRes.html('<b>Result:</b> ' + results.join(' or '));
-      console.log(results.join(' or '));
     }
 
     mandatory.keyup(() => updateResult());
     regular.keyup(() => updateResult());
     optional.keyup(() => updateResult());
-
-    // const results = regular.map((regEl) => {
-    //   const partial = optional.map(optEl => `${mandatoryJoined.trim()} ${regEl.trim()} ${optEl.trim()}`);
-    //   return partial.join(' or ');
-    // });
-
-    // console.log(results.join(' or '));
-    // if (results.length > 1) htmlRes.innerHTML = '<b>Result:</b> ' + results.join(' or ');
-
   </script>
 </body>
 
