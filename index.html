@@ -5,14 +5,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>bla</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+  <title>Query Builder</title>
 </head>
 
 <body>
-  <p id="result"></p>
-  <textarea name="mandatory" id="mandatory" cols="50" rows="10"></textarea>
-  <textarea name="regular" id="regular" cols="50" rows="10"></textarea>
-  <textarea name="optional" id="optional" cols="50" rows="10"></textarea>
+  <div class="container">
+    <p id="result" style="margin-top:2%"></p>
+    <div class="col-md-4">
+      <textarea class="form-control" name="mandatory" id="mandatory" rows="10"></textarea>
+    </div>
+    <div class="col-md-4">
+      <textarea class="form-control col-md-4" name="regular" id="regular" rows="10"></textarea>
+    </div>
+    <div class="col-md-4">
+      <textarea class="form-control col-md-4" name="optional" id="optional" rows="10"></textarea>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
     //////////////////////////////////////////
     ////////// -- EDIT THIS CODE -- //////////
@@ -37,21 +48,40 @@
 
     ///////////////////////////////////////////////////
     ////////// -- DO NOT TOUCH THIS CODE -- //////////
-    const mandatory = document.getElementById('mandatory').value.split(',');
-    const regular = document.getElementById('regular').value.split(',');
-    const optional = document.getElementById('optional').value.split(',');
-    const htmlRes = document.getElementById('result');
-    const mandatoryJoined = mandatory.join(' ');
 
-    const results = regular.map((regEl) => {
-      const partial = optional.map(optEl => `${mandatoryJoined.trim()} ${regEl.trim()} ${optEl.trim()}`);
-      return partial;
-    });
+    // const mandatory = document.getElementById('mandatory').value.split(',');
+    // const regular = document.getElementById('regular').value.split(',');
+    // const optional = document.getElementById('optional').value.split(',');
+    // const htmlRes = document.getElementById('result');
+    // const mandatoryJoined = mandatory.join(' ');
 
-    results.map(res => {
-      console.log(res.join(' or '));
-      getElementsByTagName("p")[0].innerHTML(res.join(' or '));
-    });
+    const mandatory = $('#mandatory');
+    const regular = $('#regular');
+    const optional = $('#optional');
+    const htmlRes = $('#result');
+    // const mandatoryJoined = mandatory.value.split(',').join(' ');
+
+    const updateResult = () => {
+      const mandatoryJoined = mandatory.val().split(',').map(e => e.trim()).join(' ');
+      const results = regular.val().split(',').map((regEl) => {
+        const partial = optional.val().split(',').map(optEl => `${mandatoryJoined.trim()} ${regEl.trim()} ${optEl.trim()}`);
+        return partial.join(' or ');
+      });
+      if (results.length > 1) htmlRes.html('<b>Result:</b> ' + results.join(' or '));
+      console.log(results.join(' or '));
+    }
+
+    mandatory.keyup(() => updateResult());
+    regular.keyup(() => updateResult());
+    optional.keyup(() => updateResult());
+
+    // const results = regular.map((regEl) => {
+    //   const partial = optional.map(optEl => `${mandatoryJoined.trim()} ${regEl.trim()} ${optEl.trim()}`);
+    //   return partial.join(' or ');
+    // });
+
+    // console.log(results.join(' or '));
+    // if (results.length > 1) htmlRes.innerHTML = '<b>Result:</b> ' + results.join(' or ');
 
   </script>
 </body>
